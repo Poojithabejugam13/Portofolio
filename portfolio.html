@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poojitha Bejugam | Portfolio</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+   
+  
+  
+    <style>
+        :root {
+            --bg-color: #0c0c1d;
+            --primary-color: #8a2be2;
+            --secondary-color: #4a00e0;
+            --text-light: #e0e0e0;
+            --card-bg: rgba(20, 20, 40, 0.6);
+            --card-border: rgba(138, 43, 226, 0.3);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        .bg-aurora {
+            background: var(--bg-color);
+            position: relative;
+        }
+        .bg-aurora::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at top, #2e1a47, transparent 60%), radial-gradient(ellipse at bottom, #2e1a47, transparent 70%);
+            animation: subtle-aurora 15s ease-in-out infinite alternate;
+            z-index: -1;
+        }
+
+        @keyframes subtle-aurora {
+            from {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+            to {
+                opacity: 0.8;
+                transform: scale(1.2);
+            }
+        }
+        
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease-in-out;
+        }
+        .glass-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(138, 43, 226, 0.4);
+        }
+        
+        .section-title {
+            color: #fff;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .animated-section {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animated-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .tab-btn {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+        .tab-btn.active {
+            color: white;
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+        }
+/* ====/* === MODAL BACKDROP === */
+.modal-container {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 20, 0.85);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.modal-container.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* === MODAL BOX === */
+.modal-content {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 18px;
+  padding: 1rem;
+  max-width: 90%;
+  width: 750px;
+  max-height: 90vh;
+  overflow-y: auto; /* 🔥 enable scrolling inside the modal */
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.3), 0 0 60px rgba(138, 43, 226, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: popUp 0.5s ease forwards;
+  position: relative;
+}
+.modal-img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 80vh; /* keep full image visible and scrollable if tall */
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+
+/* === ANIMATION === */
+@keyframes popUp {
+  0% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* === IMAGE === */
+.modal-img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+.modal-img:hover {
+  transform: scale(1.01);
+}
+
+/* === CAPTION === */
+.modal-caption {
+  margin-top: 1rem;
+  color: #ffffff;
+  font-size: 1.1rem;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* === CLOSE BUTTON === */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #fff;
+  font-size: 1.4rem;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+.typing-cursor {
+    display: inline-block;
+    width: 4px;
+    height: 1em;
+    background-color: var(--primary-color);
+    animation: blink 0.8s infinite;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+@keyframes blink {
+    50% { opacity: 0; }
+}
+    </style>
+</head>
+<body class="bg-aurora">
+<canvas id="particles-js" class="fixed top-0 left-0 w-full h-full z-[-1]"></canvas>
+
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-sm opacity-0 transition-opacity duration-1000">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-white">Poojitha B.</a>
+            <div class="hidden md:flex space-x-6 items-center text-sm">
+                <a href="#about" class="hover:text-[var(--primary-color)] transition-colors">About</a>
+                <a href="#showcase" class="hover:text-[var(--primary-color)] transition-colors">Projects</a>
+                <a href="#contact" class="hover:text-[var(--primary-color)] transition-colors">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-black/50 backdrop-blur-lg">
+            <a href="#about" class="block text-center py-3 hover:bg-white/10 transition-colors">About</a>
+            <a href="#showcase" class="block text-center py-3 hover:bg-white/10 transition-colors">Projects</a>
+            <a href="#contact" class="block text-center py-3 hover:bg-white/10 transition-colors">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="min-h-screen flex items-center justify-center pt-16 md:pt-0 opacity-100 transition-opacity duration-1000">
+            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-8 items-center text-center md:text-left">
+                <div>
+                    <h1 id="hero-title" class="text-5xl md:text-7xl font-bold text-white leading-tight"></h1>
+                    <p class="text-lg md:text-xl text-gray-300 mt-2">Information Technology Student</p>
+                </div>
+                <div class="flex justify-center items-center">
+                    <svg class="w-full max-w-lg h-auto" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g transform="translate(0, 20)">
+                            <path d="M40,388 L40,158 C40,146.954 48.9543,138 60,138 L452,138 C463.046,138 472,146.954 472,158 L472,388" stroke="#4A00E0" stroke-width="4" fill="none"/>
+                            <path d="M256,388 L256,428" stroke="#4A00E0" stroke-width="4"/>
+                            <path d="M186,428 L326,428" stroke="#4A00E0" stroke-width="4"/>
+                            <rect x="60" y="158" width="392" height="230" rx="8" fill="#0C0C1D" fill-opacity="0.5"/>
+                            <circle cx="256" cy="108" r="48" fill="#8A2BE2"/>
+                            <path d="M242 94 L256 122 L270 94" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M232 112 L280 112" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                            <rect x="24" y="24" width="205.714" height="137.143" rx="12" fill="#0C0C1D" fill-opacity="0.7" stroke="#8A2BE2" stroke-width="3"/>
+                            <rect x="42.2857" y="42.2857" width="164.571" height="14.2857" rx="4" fill="#4A00E0"/>
+                            <rect x="42.2857" y="72.5714" width="120" height="10" rx="4" fill="#8A2BE2" fill-opacity="0.5"/>
+                            <rect x="42.2857" y="98.8571" width="164.571" height="10" rx="4" fill="#8A2BE2" fill-opacity="0.5"/>
+                            <rect x="42.2857" y="125.143" width="90" height="10" rx="4" fill="#8A2BE2" fill-opacity="0.5"/>
+                            <rect x="283.429" y="274.857" width="205.714" height="137.143" rx="12" fill="#0C0C1D" fill-opacity="0.7" stroke="#8A2BE2" stroke-width="3"/>
+                            <rect x="301.714" y="292" width="164.571" height="14.2857" rx="4" fill="#4A00E0"/>
+                            <rect x="301.714" y="322.286" width="120" height="10" rx="4" fill="#8A2BE2" fill-opacity="0.5"/>
+                            <rect x="301.714" y="348.571" width="164.571" height="10" rx="4" fill="#8A2BE2" fill-opacity="0.5"/>
+                            <rect x="301.714" y="374.857" width="90" height="10" rx="4" fill="#8A2BE2" fill-opacity="0.5"/>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <div id="main-content" class="hidden">
+            <section id="welcome" class="py-16 text-center animated-section">
+                <div class="flex justify-center items-center space-x-4 mb-4">
+                    <span class="text-3xl text-gray-400">&lt;/&gt;</span>
+                    <img src="https://img.icons8.com/ios-filled/50/8a2be2/laptop-coding.png" alt="coding icon" class="w-12 h-12"/>
+                    <img src="https://img.icons8.com/ios-filled/50/8a2be2/gears.png" alt="gears icon" class="w-12 h-12"/>
+                </div>
+                <h2 class="text-2xl md:text-4xl font-bold text-white">Welcome To My Portfolio Website</h2>
+            </section>
+
+            <section id="about" class="pt-16 pb-20 md:pb-28 animated-section">
+                <div class="container mx-auto px-6">
+                    <h2 class="section-title text-3xl text-center mb-12">About Me</h2>
+                    <div class="grid grid-cols-3 gap-6 md:gap-12 items-center">
+                        <div class="col-span-3 md:col-span-2">
+                            <p class="text-lg text-gray-300 mb-2">Hello, I'm</p>
+                            <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">Poojitha Bejugam</h3>
+                            <p class="text-gray-400 leading-relaxed text-sm md:text-base">
+                                A passionate final-year B.Tech IT student skilled in full-stack web development, Python, and Java. I have a solid foundation in Object-Oriented Programming, Data Structures, and SQL. With a strong interest in AI and cybersecurity, I'm eager to apply my technical skills to create innovative, real-world software solutions and grow in challenging development roles.
+                            </p>
+                        </div>
+                        <div class="col-span-3 md:col-span-1 flex justify-center">
+                            <div class="w-48 h-48 md:w-64 md:h-64 rounded-full glass-card p-2 flex items-center justify-center">
+                                <img src="images/profile.png" alt="Poojitha Bejugam" class="w-full h-full object-cover rounded-full">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="showcase" class="py-20 md:py-28 animated-section">
+                <div class="container mx-auto px-6">
+                    <h2 class="section-title text-3xl text-center mb-12">Portfolio Showcase</h2>
+                    <div class="flex justify-center flex-wrap gap-4 mb-12">
+                        <button class="tab-btn active px-5 py-2 rounded-md font-semibold text-sm" data-tab="projects">Projects</button>
+                        <button class="tab-btn px-5 py-2 rounded-md font-semibold text-sm" data-tab="certificates">Certificates</button>
+                        <button class="tab-btn px-5 py-2 rounded-md font-semibold text-sm" data-tab="achievements">Achievements</button>
+                        <button class="tab-btn px-5 py-2 rounded-md font-semibold text-sm" data-tab="techstack">Tech Stack</button>
+                    </div>
+                    <div id="showcase-content" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="py-20 md:py-28 animated-section">
+    <div class="container mx-auto px-6 text-center">
+        <h2 class="section-title text-3xl mb-12 inline-block">Get In Touch</h2>
+        <p class="max-w-2xl mx-auto text-gray-300 mb-8">
+            I'm currently looking for new opportunities and my inbox is always open. Whether you have a question or just want to connect, feel free to reach out!
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-6">
+            <a href="mailto:poojithabejugam13@gmail.com" class="w-full sm:w-auto text-center bg-gradient-to-r from-secondary-color to-primary-color text-white font-bold py-3 px-8 rounded-md transition-transform transform hover:scale-105">
+                Send an Email
+            </a>
+            <a href="https://www.linkedin.com/in/poojitha-bejugam-87a673274" target="_blank" class="w-full sm:w-auto text-center border-2 border-primary-color text-white font-bold py-3 px-8 rounded-md transition-transform transform hover:scale-105 hover:bg-primary-color">
+                Message on LinkedIn
+            </a>
+        </div>
+    </div>
+</section>
+        </div>
+    </main>
+    
+    <div id="item-modal" class="modal-container">
+        <div id="modal-content" class="glass-card rounded-lg max-w-2xl w-full m-4 modal-content">
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const projectsData = [
+                {
+                    title: "Early Warning System for DDoS Traffic",
+                    category: "Full-Stack",
+                    description: "Deployed a full-stack Flask and React application for real-time DDoS alert visualization. Pioneered a detection method using Partial Differential Equations (PDEs) to extract dynamic traffic features for early threat identification.",
+                    tech: ["Flask", "React", "PDEs", "Z-Scores"],
+                    img: "https://placehold.co/600x400/0c0c1d/8a2be2?text=DDoSAlertX",
+                    liveDemo: "https://ddosalertx.onrender.com/",
+                    gitLink: "https://github.com/Poojithabejugam13"
+                },
+                {
+                    title: "MediConnect Healthcare Platform",
+                    category: "Full-Stack",
+                    description: "Architected a full-stack MERN platform featuring three distinct user portals (Patient, Doctor, Admin) secured by robust role-based authentication. Developed core functionalities, including an end-to-end appointment booking system and a real-time chat feature using Socket.io.",
+                    tech: ["React", "Node.js", "MongoDB", "Socket.io"],
+                    img: "https://placehold.co/600x400/0c0c1d/8a2be2?text=MediConnect",
+                    liveDemo: "https://mediconnectpatient.onrender.com/",
+                    gitLink: "https://github.com/Poojithabejugam13"
+                },
+                {
+                    title: "Catering Management App",
+                    category: "Client Project",
+                    description: "Architected a secure React platform with role-based dashboards using JWT authentication, and managed complex application-wide state with Redux Toolkit. Engineered a full suite of business features, including a caterer dashboard with analytics and real-time order tracking.",
+                    tech: ["MERN Stack", "Redux", "JWT"],
+                    img: "https://placehold.co/600x400/0c0c1d/8a2be2?text=Catering+App",
+                    liveDemo: null,
+                    gitLink: "https://github.com/Poojithabejugam13"
+                },
+                {
+                    title: "Banking Management System",
+                    category: "Java Application",
+                    description: "Developed a fully object-oriented banking application in Java, using distinct classes to ensure a modular and scalable design. Engineered the core data system using a HashMap to achieve efficient, O(1) average-time retrieval of customer accounts.",
+                    tech: ["Java", "Data Structures", "OOPs"],
+                    img: "https://placehold.co/600x400/0c0c1d/8a2be2?text=Banking+System",
+                    liveDemo: null,
+                    gitLink: "https://github.com/Poojithabejugam13"
+                }
+            ];
+            
+            const certificatesData = [
+                // NOTE: Replace '#' with your local file paths, e.g., "images/cert-smart-coder.png"
+                { name: "Smart Coder Diamond Certification", img: "https://placehold.co/400x300/0c0c1d/e0e0e0?text=Smart+Coder", link: "images/cert-smart-coder.png" },
+                { name: "PWC CyberRisk Launchpad Program", img: "https://placehold.co/400x300/0c0c1d/e0e0e0?text=Pwc+Launchpad", link: "images/pwc.png" },
+                { name: "SQL Advanced Certification", img: "https://placehold.co/400x300/0c0c1d/e0e0e0?text=SQL+Advanced", link: "images/sql.png" },
+                { name: "Advanced Java Certification", img: "https://placehold.co/400x300/0c0c1d/e0e0e0?text=Java+Programming", link: "images/java.png" },
+                
+                { name: "Python Programming", img: "https://placehold.co/400x300/0c0c1d/e0e0e0?text=Python", link: "images/python.png" }
+            ];
+
+            const achievementsData = [
+                // NOTE: Replace '#' with your local file paths, e.g., "images/ach-leadership.png"
+               
+                { title: "Finalist, CodeNox 2.0", description: "Ranked among top teams for advanced coding.", img: "https://placehold.co/400x300/0c0c1d/e0e0e0?text=CodeNox+2.0", link: "images/octcoder.png" },
+                { title: "Top 10%, Turing Hunt", description: "National coding competition with 500+ participants.", img: "https://placehold.co/400x300/0c0c1d/e0e0e0?text=Turing+Hunt", link: "images/turinghut.png" },
+                { title: "Top 5%, VJ National Hackathon", description: "Built a real-time predictive solution.", img: "https://placehold.co/400x300/0c0c1d/e0e0e0?text=VJ+Hackathon", link: "images/vj.png" }
+            ];
+            const techStackData = [
+                { name: "Java", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" },
+                { name: "Python", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
+                { name: "HTML5", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" },
+                { name: "CSS3", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" },
+                { name: "JavaScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" },
+                { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
+                { name: "MongoDB", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" },
+                { name: "SQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" },
+                { name: "DSA", logo: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjgiIGZpbGw9IiM0NDQ3NGEiPjwvcmVjdD48dGV4dCB4PSI1MCUiIHk9IjU1JSIgZm9udC1mYW1pbHk9InNlcmlmIiBmb250LXNpemU9IjYwIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmIj5EU0E8L3RleHQ+PC9zdmc+" },
+                { name: "OOPs", logo: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjgiIGZpbGw9IiM0NDQ3NGEiPjwvcmVjdD48dGV4dCB4PSI1MCUiIHk9IjU1JSIgZm9udC1mYW1pbHk9InNlcmlmIiBmb250LXNpemU9IjUwIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmIj5PT1BT PC90ZXh0Pjwvc3ZnPg==" }
+            ];
+
+            const showcaseGrid = document.getElementById('showcase-content');
+            const tabs = document.querySelectorAll('.tab-btn');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.animated-section').forEach(el => observer.observe(el));
+  const heroSection = document.getElementById('hero');
+        const mainContent = document.getElementById('main-content');
+        const header = document.getElementById('header');
+        const heroTitle = document.getElementById('hero-title');
+
+        const titles = ["Web Developer", "Software Developer"];
+        let titleIndex = 0;
+        let charIndex = 0;
+
+        function fadeOutHero() {
+            heroSection.classList.add('opacity-0');
+            // Use a reliable timeout to hide the element after the CSS transition
+            setTimeout(() => {
+                heroSection.style.display = 'none';
+                mainContent.classList.remove('hidden');
+                header.classList.remove('opacity-0');
+            }, 1000); // This duration should match your CSS transition duration
+        }
+
+        function type() {
+            if (charIndex < titles[titleIndex].length) {
+                if (titles[titleIndex].substring(0, charIndex + 1) === "Web") {
+                     heroTitle.innerHTML = `<span class="text-gradient">Web</span>` + titles[titleIndex].substring(3, charIndex + 1) + '<span class="typing-cursor"></span>';
+                } else {
+                     heroTitle.innerHTML = titles[titleIndex].substring(0, charIndex + 1) + '<span class="typing-cursor"></span>';
+                }
+                charIndex++;
+                setTimeout(type, 150);
+            } else {
+                // Pause at the end of the word before erasing or transitioning
+                setTimeout(erase, 2000);
+            }
+        }
+
+        function erase() {
+            if (charIndex > 0) {
+                heroTitle.innerHTML = titles[titleIndex].substring(0, charIndex - 1) + '<span class="typing-cursor"></span>';
+                charIndex--;
+                setTimeout(erase, 100);
+            } else {
+                titleIndex++;
+                // If there are more titles to type, type the next one
+                if (titleIndex < titles.length) {
+                    setTimeout(type, 500);
+                } else {
+                    // If all titles have been typed, start the transition
+                    setTimeout(fadeOutHero, 500);
+                }
+            }
+        }
+        
+        // Start the animation sequence
+        if(heroTitle) {
+            type();
+        }
+
+            function renderProjects() {
+                showcaseGrid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8';
+                showcaseGrid.innerHTML = '';
+                projectsData.forEach((project) => {
+                    const projectCard = document.createElement('div');
+                    projectCard.className = 'glass-card rounded-lg p-4 cursor-pointer';
+                    projectCard.innerHTML = `
+                        <img src="${project.img}" alt="${project.title}" class="rounded-md mb-4 w-full h-40 object-cover">
+                        <h3 class="text-lg font-bold text-white mb-2">${project.title}</h3>
+                        <p class="text-sm text-gray-400">${project.category}</p>
+                    `;
+                    projectCard.addEventListener('click', () => openProjectModal(project));
+                    showcaseGrid.appendChild(projectCard);
+                });
+            }
+
+            function renderCertificates() {
+                showcaseGrid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8';
+                showcaseGrid.innerHTML = '';
+                certificatesData.forEach(cert => {
+                    const certCard = document.createElement('div');
+                    certCard.className = 'glass-card rounded-lg p-4 cursor-pointer';
+                    certCard.innerHTML = `
+                        <img src="${cert.img}" alt="${cert.name}" class="rounded-md mb-4 w-full h-40 object-cover">
+                        <h3 class="font-semibold text-white text-center">${cert.name}</h3>
+                    `;
+                    certCard.addEventListener('click', () => openCertificateModal(cert));
+                    showcaseGrid.appendChild(certCard);
+                });
+            }
+
+            function renderAchievements() {
+                showcaseGrid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8';
+                showcaseGrid.innerHTML = '';
+                achievementsData.forEach(ach => {
+                    const achCard = document.createElement('div');
+                    achCard.className = 'glass-card rounded-lg p-4 cursor-pointer';
+                    achCard.innerHTML = `
+                        <img src="${ach.img}" alt="${ach.title}" class="rounded-md mb-4 w-full h-40 object-cover">
+                        <h3 class="font-semibold text-white text-center">${ach.title}</h3>
+                    `;
+                    achCard.addEventListener('click', () => openAchievementModal(ach));
+                    showcaseGrid.appendChild(achCard);
+                });
+            }
+
+            function renderTechStack() {
+                showcaseGrid.className = 'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8';
+                showcaseGrid.innerHTML = '';
+                techStackData.forEach(tech => {
+                    const techCard = document.createElement('div');
+                    techCard.className = 'glass-card rounded-lg p-6 text-center flex flex-col justify-center items-center h-full';
+                    techCard.innerHTML = `
+                        <img src="${tech.logo}" alt="${tech.name} logo" class="h-12 w-12 mx-auto">
+                        <p class="font-medium text-white mt-4">${tech.name}</p>
+                    `;
+                    showcaseGrid.appendChild(techCard);
+                });
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const tabType = tab.dataset.tab;
+                    if (tabType === 'projects') renderProjects();
+                    else if (tabType === 'certificates') renderCertificates();
+                    else if (tabType === 'achievements') renderAchievements();
+                    else if (tabType === 'techstack') renderTechStack();
+                });
+            });
+
+            renderProjects();
+
+            const modal = document.getElementById('item-modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            function openProjectModal(project) {
+                modalContent.innerHTML = `
+                    <div class="p-6 relative">
+                        <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
+                        <img src="${project.img}" alt="${project.title}" class="rounded-lg mb-4 w-full h-56 object-cover">
+                        <h2 class="text-2xl font-bold text-white mb-2">${project.title}</h2>
+                        <p class="text-gray-300 mb-4">${project.description}</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            ${project.tech.map(t => `<span class="bg-white/10 text-xs font-semibold px-2 py-1 rounded-full">${t}</span>`).join('')}
+                        </div>
+                        <div class="flex space-x-4 mt-6">
+                            ${project.liveDemo ? `<a href="${project.liveDemo}" target="_blank" class="flex-1 text-center bg-gradient-to-r from-secondary-color to-primary-color text-white font-bold py-2 px-4 rounded-md">Live Demo</a>` : ''}
+                            ${project.gitLink ? `<a href="${project.gitLink}" target="_blank" class="flex-1 text-center bg-gray-700 text-white font-bold py-2 px-4 rounded-md">GitHub</a>` : ''}
+                        </div>
+                    </div>
+                `;
+                modal.classList.add('visible');
+                document.getElementById('close-modal').addEventListener('click', closeModal);
+            }
+
+            function openCertificateModal(certificate) {
+                modalContent.innerHTML = `
+                    <div class="p-6 relative">
+                        <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
+                        <h2 class="text-2xl font-bold text-white mb-4 text-center">${certificate.name}</h2>
+                        <img src="${certificate.link}" alt="${certificate.name}" class="rounded-lg w-full h-auto">
+                    </div>
+                `;
+                modal.classList.add('visible');
+                document.getElementById('close-modal').addEventListener('click', closeModal);
+            }
+
+            function openAchievementModal(achievement) {
+                modalContent.innerHTML = `
+                    <div class="p-6 relative">
+                        <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
+                        <h2 class="text-2xl font-bold text-white mb-4 text-center">${achievement.title}</h2>
+                        <p class="text-gray-300 mb-4 text-center">${achievement.description}</p>
+                        <img src="${achievement.link}" alt="${achievement.title}" class="rounded-lg w-full h-auto">
+                    </div>
+                `;
+                modal.classList.add('visible');
+                document.getElementById('close-modal').addEventListener('click', closeModal);
+            }
+
+            function closeModal() {
+                modal.classList.remove('visible');
+            }
+            
+            modal.addEventListener('click', (e) => {
+                if(e.target === modal) closeModal();
+            });
+            
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+        });
+        // --- HERO TYPING ANIMATION ---
+const heroTitle = document.getElementById('hero-title');
+const titles = ["Web Developer", "Software Developer"];
+let titleIndex = 0;
+let charIndex = 0;
+
+function type() {
+    if (charIndex < titles[titleIndex].length) {
+        // Add the gradient span only for "Web"
+        if (titles[titleIndex].substring(0, charIndex + 1) === "Web") {
+             heroTitle.innerHTML = `<span class="text-gradient">Web</span><span class="typing-cursor"></span>`;
+        } else {
+             heroTitle.innerHTML = titles[titleIndex].substring(0, charIndex + 1) + '<span class="typing-cursor"></span>';
+        }
+        charIndex++;
+        setTimeout(type, 150);
+    } else {
+        setTimeout(erase, 2000); // Wait 2 seconds before erasing
+    }
+}
+
+function erase() {
+    if (charIndex > 0) {
+        heroTitle.innerHTML = titles[titleIndex].substring(0, charIndex - 1) + '<span class="typing-cursor"></span>';
+        charIndex--;
+        setTimeout(erase, 100);
+    } else {
+        titleIndex = (titleIndex + 1) % titles.length;
+        setTimeout(type, 500); // Wait half a second before typing next title
+    }
+}
+
+// Start the animation
+type();
+    </script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+  particlesJS("particles-js", {
+    particles: {
+      number: { value: 40 },
+      color: { value: "#8a2be2" },
+      shape: { type: "circle" },
+      opacity: { value: 0.4 },
+      size: { value: 3 },
+      line_linked: {
+        enable: true,
+        distance: 150,
+        color: "#8a2be2",
+        opacity: 0.2,
+        width: 1
+      },
+      move: { enable: true, speed: 1 }
+    },
+    interactivity: {
+      events: {
+        onhover: { enable: true, mode: "grab" },
+        onclick: { enable: true, mode: "push" }
+      },
+      modes: {
+        grab: { distance: 200, line_linked: { opacity: 0.5 } },
+        push: { particles_nb: 4 }
+      }
+    },
+    retina_detect: true
+  });
+</script>
+
+</body>
+</html>
